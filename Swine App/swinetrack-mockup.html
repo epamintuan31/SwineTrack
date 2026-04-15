@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SwineTrack – Mobile App Mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-50: #f0f9ec;
+    --green-100: #d4edca;
+    --green-200: #a8d994;
+    --green-400: #6ab04c;
+    --green-600: #3e7d2b;
+    --green-800: #234a18;
+    --green-900: #122a0d;
+    --amber-50: #fef8ec;
+    --amber-100: #fde9b4;
+    --amber-200: #fbd06b;
+    --amber-400: #f5a623;
+    --amber-600: #c47d0a;
+    --amber-800: #7a4c04;
+    --brown-50: #fdf6ef;
+    --brown-100: #f5e0c7;
+    --brown-400: #c49264;
+    --brown-600: #8b5e3c;
+    --brown-800: #4d3220;
+    --red-100: #fde8e8;
+    --red-400: #e85555;
+    --red-600: #b83535;
+    --blue-100: #e4f0fb;
+    --blue-400: #4a9de0;
+    --blue-600: #2471b8;
+    --gray-50: #f7f5f2;
+    --gray-100: #ede9e3;
+    --gray-200: #d4cfc8;
+    --gray-400: #9e9890;
+    --gray-600: #6b6560;
+    --gray-800: #3d3a36;
+    --white: #ffffff;
+    --font-main: 'Nunito', sans-serif;
+    --font-head: 'Sora', sans-serif;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.18);
+  }
+
+  body {
+    font-family: var(--font-main);
+    background: #e8e2d9;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px 40px;
+    background-image: radial-gradient(circle at 20% 20%, #d4e8c7 0%, transparent 50%),
+                      radial-gradient(circle at 80% 80%, #f5e0c7 0%, transparent 50%);
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .page-header h1 {
+    font-family: var(--font-head);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--green-800);
+    letter-spacing: -0.5px;
+  }
+  .page-header p {
+    font-size: 14px;
+    color: var(--gray-600);
+    margin-top: 4px;
+  }
+  .badge-row {
+    display: flex; gap: 8px; justify-content: center; margin-top: 10px; flex-wrap: wrap;
+  }
+  .badge {
+    font-size: 11px; font-weight: 700; padding: 3px 10px;
+    border-radius: 20px; letter-spacing: 0.03em;
+  }
+  .badge-green { background: var(--green-100); color: var(--green-800); }
+  .badge-amber { background: var(--amber-100); color: var(--amber-800); }
+  .badge-brown { background: var(--brown-100); color: var(--brown-800); }
+
+  .device-wrap {
+    position: relative;
+    width: 375px;
+    max-width: 100%;
+  }
+
+  .phone-frame {
+    width: 375px;
+    max-width: 100%;
+    min-height: 780px;
+    background: var(--gray-50);
+    border-radius: 44px;
+    box-shadow: 0 0 0 8px #2a2a2a, 0 0 0 10px #1a1a1a, var(--shadow-lg);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .status-bar {
+    background: var(--green-800);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px 6px;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .status-bar .notch {
+    width: 100px; height: 20px;
+    background: #2a2a2a;
+    border-radius: 0 0 14px 14px;
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .app-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    background: var(--gray-50);
+    -webkit-overflow-scrolling: touch;
+  }
+  .app-content::-webkit-scrollbar { display: none; }
+
+  .screen { display: none; flex-direction: column; min-height: 100%; }
+  .screen.active { display: flex; }
+
+  .top-bar {
+    background: var(--green-800);
+    padding: 14px 20px 18px;
+    color: white;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .top-bar-simple {
+    background: var(--green-800);
+    padding: 14px 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .top-bar-simple h2 { font-family: var(--font-head); font-size: 17px; font-weight: 600; }
+  .top-bar-simple .back-btn {
+    background: rgba(255,255,255,0.15);
+    border: none; border-radius: 50%;
+    width: 30px; height: 30px;
+    color: white; font-size: 16px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+
+  .top-bar .greeting { font-size: 13px; opacity: 0.8; margin-bottom: 2px; }
+  .top-bar h2 { font-family: var(--font-head); font-size: 20px; font-weight: 700; }
+  .top-bar .pig-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 20px; padding: 4px 12px;
+    font-size: 12px; font-weight: 600; margin-top: 8px;
+  }
+
+  .screen-body { padding: 16px; flex: 1; }
+
+  /* HOME */
+  .day-hero {
+    background: linear-gradient(135deg, var(--green-600), var(--green-400));
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    color: white;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-sm);
+  }
+  .day-hero .day-num { font-size: 52px; font-family: var(--font-head); font-weight: 800; line-height: 1; }
+  .day-hero .day-label { font-size: 12px; opacity: 0.8; }
+  .day-hero .day-right { text-align: right; }
+  .day-hero .days-left { font-size: 13px; opacity: 0.8; }
+  .day-hero .big-pig { font-size: 54px; line-height: 1; }
+
+  .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+  .stat-card {
+    background: white; border-radius: var(--radius-md);
+    padding: 14px; box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-100);
+  }
+  .stat-card .stat-icon { font-size: 20px; margin-bottom: 6px; }
+  .stat-card .stat-val { font-size: 22px; font-weight: 800; font-family: var(--font-head); color: var(--gray-800); }
+  .stat-card .stat-lbl { font-size: 11px; color: var(--gray-600); margin-top: 2px; }
+  .stat-card .adg-good { color: var(--green-600); }
+  .stat-card .adg-bad { color: var(--red-400); }
+
+  .section-title {
+    font-size: 13px; font-weight: 700; color: var(--gray-600);
+    letter-spacing: 0.04em; text-transform: uppercase;
+    margin-bottom: 10px; margin-top: 4px;
+  }
+
+  .task-card {
+    background: white; border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 8px;
+    display: flex; align-items: center; gap: 12px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-100);
+    cursor: pointer;
+    transition: transform 0.1s;
+  }
+  .task-card:active { transform: scale(0.98); }
+  .task-card .task-icon {
+    width: 40px; height: 40px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .task-icon-green { background: var(--green-50); }
+  .task-icon-amber { background: var(--amber-50); }
+  .task-icon-brown { background: var(--brown-50); }
+  .task-icon-blue { background: var(--blue-100); }
+  .task-card .task-info { flex: 1; }
+  .task-card .task-name { font-size: 14px; font-weight: 700; color: var(--gray-800); }
+  .task-card .task-sub { font-size: 12px; color: var(--gray-600); margin-top: 2px; }
+  .task-card .task-check {
+    width: 24px; height: 24px; border-radius: 50%;
+    border: 2px solid var(--gray-200);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 13px;
+  }
+  .task-check.done { background: var(--green-400); border-color: var(--green-400); color: white; }
+
+  .progress-bar-wrap { background: var(--gray-100); border-radius: 20px; height: 8px; margin-bottom: 14px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; border-radius: 20px; background: var(--green-400); transition: width 0.4s ease; }
+
+  .tip-card {
+    background: var(--amber-50); border: 1px solid var(--amber-100);
+    border-radius: var(--radius-md); padding: 12px 14px;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .tip-card .tip-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .tip-card .tip-text { font-size: 12px; color: var(--amber-800); line-height: 1.5; }
+  .tip-card .tip-title { font-weight: 700; font-size: 12px; color: var(--amber-800); margin-bottom: 3px; }
+
+  /* CALENDAR */
+  .cal-month-label {
+    font-family: var(--font-head); font-size: 18px; font-weight: 700;
+    color: var(--gray-800); padding: 0 16px 10px;
+  }
+  .cal-legend {
+    display: flex; gap: 12px; padding: 0 16px 14px; flex-wrap: wrap;
+  }
+  .leg-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--gray-600); }
+  .leg-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  .cal-grid {
+    display: grid; grid-template-columns: repeat(7, 1fr);
+    gap: 4px; padding: 0 12px 16px;
+  }
+  .cal-day {
+    aspect-ratio: 1; border-radius: 10px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; cursor: pointer;
+    transition: transform 0.1s;
+    position: relative;
+  }
+  .cal-day:active { transform: scale(0.93); }
+  .cal-day.done { background: var(--green-100); color: var(--green-800); }
+  .cal-day.today { background: var(--green-600); color: white; box-shadow: 0 0 0 2px var(--green-200); }
+  .cal-day.pending { background: var(--gray-100); color: var(--gray-400); }
+  .cal-day.locked { background: var(--gray-50); color: var(--gray-200); cursor: default; }
+  .cal-day.missed { background: var(--red-100); color: var(--red-600); }
+  .cal-dot { width: 4px; height: 4px; border-radius: 50%; background: currentColor; opacity: 0.5; margin-top: 2px; }
+
+  /* CHECKLIST SCREEN */
+  .checklist-header {
+    background: white; margin: 16px; border-radius: var(--radius-lg);
+    padding: 14px; box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-100);
+  }
+  .progress-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .progress-label { font-size: 12px; color: var(--gray-600); font-weight: 600; }
+  .progress-num { font-size: 14px; font-weight: 800; color: var(--green-600); margin-left: auto; }
+
+  .check-section { margin: 0 16px 14px; }
+  .check-section-title {
+    font-size: 12px; font-weight: 800; color: var(--gray-600);
+    text-transform: uppercase; letter-spacing: 0.05em;
+    margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+  }
+
+  .check-item {
+    background: white; border-radius: var(--radius-md);
+    padding: 14px; margin-bottom: 6px;
+    display: flex; align-items: center; gap: 12px;
+    box-shadow: var(--shadow-sm); border: 1px solid var(--gray-100);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .check-item.checked { border-color: var(--green-200); background: var(--green-50); }
+  .check-item.checked .check-text { color: var(--gray-400); text-decoration: line-through; }
+  .check-circle {
+    width: 26px; height: 26px; border-radius: 50%;
+    border: 2px solid var(--gray-200); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; transition: all 0.2s;
+  }
+  .check-item.checked .check-circle { background: var(--green-400); border-color: var(--green-400); color: white; }
+  .check-text { font-size: 14px; font-weight: 600; color: var(--gray-800); flex: 1; }
+  .check-sub { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
+
+  .gate-btn {
+    margin: 0 16px 20px;
+    background: var(--gray-200); border: none;
+    border-radius: var(--radius-md); padding: 16px;
+    font-size: 15px; font-weight: 700; color: var(--gray-500);
+    width: calc(100% - 32px); cursor: not-allowed;
+    font-family: var(--font-main); transition: all 0.3s;
+  }
+  .gate-btn.unlocked {
+    background: var(--green-600); color: white; cursor: pointer;
+    box-shadow: 0 4px 12px rgba(62,125,43,0.35);
+  }
+
+  /* FEEDING */
+  .feed-stage-card {
+    background: var(--green-800); border-radius: var(--radius-lg);
+    padding: 16px; margin: 16px; color: white;
+  }
+  .feed-stage-card .stage-label { font-size: 11px; opacity: 0.7; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .feed-stage-card .stage-name { font-family: var(--font-head); font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+  .feed-stage-card .weight-range { font-size: 13px; opacity: 0.85; }
+
+  .feed-session-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 16px 14px; }
+  .feed-session {
+    background: white; border-radius: var(--radius-md);
+    padding: 14px; text-align: center;
+    box-shadow: var(--shadow-sm); border: 1px solid var(--gray-100);
+  }
+  .feed-session .session-time { font-size: 11px; color: var(--gray-500); margin-bottom: 6px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+  .feed-session .session-icon { font-size: 28px; margin-bottom: 6px; }
+  .feed-session .session-kg { font-size: 24px; font-weight: 800; font-family: var(--font-head); color: var(--green-600); }
+  .feed-session .session-unit { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
+
+  .feed-price-card {
+    background: white; border-radius: var(--radius-md);
+    padding: 14px 16px; margin: 0 16px 10px;
+    box-shadow: var(--shadow-sm); border: 1px solid var(--gray-100);
+  }
+  .feed-price-card .price-row { display: flex; align-items: center; justify-content: space-between; }
+  .feed-price-card .price-label { font-size: 13px; font-weight: 700; color: var(--gray-700); }
+  .feed-price-card .price-val { font-size: 18px; font-weight: 800; font-family: var(--font-head); color: var(--amber-600); }
+  .feed-price-card .price-sub { font-size: 11px; color: var(--gray-500); margin-top: 4px; }
+
+  /* HEALTH */
+  .health-obs-card {
+    background: white; border-radius: var(--radius-lg);
+    padding: 16px; margin: 0 16px 12px;
+    box-shadow: var(--shadow-sm); border: 1px solid var(--gray-100);
+  }
+  .health-obs-card .obs-title { font-size: 14px; font-weight: 700; color: var(--gray-800); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .obs-option-row { display: flex; gap: 8px; }
+  .obs-option {
+    flex: 1; padding: 10px; border-radius: var(--radius-sm);
+    border: 2px solid var(--gray-100); text-align: center;
+    cursor: pointer; transition: all 0.2s;
+    font-size: 12px; font-weight: 600; color: var(--gray-600);
+  }
+  .obs-option .opt-icon { font-size: 20px; margin-bottom: 4px; }
+  .obs-option.selected-normal { border-color: var(--green-400); background: var(--green-50); color: var(--green-700); }
+  .obs-option.selected-abnormal { border-color: var(--red-400); background: var(--red-100); color: var(--red-600); }
+
+  .alert-box {
+    background: var(--red-100); border: 1px solid #fca5a5;
+    border-radius: var(--radius-md); padding: 12px;
+    display: flex; gap: 8px; align-items: flex-start;
+    margin-top: 10px;
+  }
+  .alert-box .alert-icon { font-size: 16px; flex-shrink: 0; }
+  .alert-box .alert-text { font-size: 12px; color: var(--red-600); line-height: 1.5; }
+
+  /* WEIGHT */
+  .adg-hero {
+    background: white; border-radius: var(--radius-lg);
+    padding: 16px; margin: 16px;
+    box-shadow: var(--shadow-sm); border: 1px solid var(--gray-100);
+    text-align: center;
+  }
+  .adg-label { font-size: 12px; color: var(--gray-500); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+  .adg-value { font-size: 48px; font-weight: 800; font-family: var(--font-head); line-height: 1.1; }
+  .adg-unit { font-size: 14px; color: var(--gray-500); margin-top: 2px; }
+  .adg-status-badge {
+    display: inline-block; padding: 4px 14px; border-radius: 20px;
+    font-size: 12px; font-weight: 700; margin-top: 8px;
+  }
+  .adg-status-badge.on-track { background: var(--green-100); color: var(--green-700); }
+  .adg-status-badge.below { background: var(--red-100); color: var(--red-600); }
+
+  .weight-chart-wrap {
+    background: white; border-radius: var(--radius-lg);
+    padding: 16px; margin: 0 16px 14px;
+    box-shadow: var(--shadow-sm); border: 1px solid var(--gray-100);
+  }
+  .chart-title { font-size: 13px; font-weight: 700; color: var(--gray-700); margin-bottom: 12px; }
+  .chart-svg { width: 100%; height: 140px; }
+
+  .weigh-list { padding: 0 16px; }
+  .weigh-row {
+    background: white; border-radius: var(--radius-md);
+    padding: 12px 14px; margin-bottom: 6px;
+    display: flex; align-items: center; gap: 12px;
+    box-shadow: var(--shadow-sm); border: 1px solid var(--gray-100);
+  }
+  .weigh-row .w-day { font-size: 11px; font-weight: 700; color: var(--gray-500); width: 44px; }
+  .weigh-row .w-kg { font-size: 16px; font-weight: 800; color: var(--gray-800); }
+  .weigh-row .w-adg { font-size: 12px; margin-left: auto; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+  .w-adg.good { background: var(--green-100); color: var(--green-700); }
+  .w-adg.low { background: var(--red-100); color: var(--red-600); }
+
+  /* EXPENSE */
+  .roi-hero {
+    background: linear-gradient(135deg, var(--brown-600), var(--brown-400));
+    border-radius: var(--radius-lg); margin: 16px;
+    padding: 18px; color: white;
+  }
+  .roi-hero .roi-title { font-size: 12px; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px; }
+  .roi-hero .roi-amount { font-size: 36px; font-weight: 800; font-family: var(--font-head); }
+  .roi-hero .roi-pct { font-size: 14px; opacity: 0.9; margin-top: 4px; }
+  .roi-sub-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+  .roi-sub { background: rgba(255,255,255,0.15); border-radius: var(--radius-sm); padding: 10px; }
+  .roi-sub .rs-label { font-size: 11px; opacity: 0.75; }
+  .roi-sub .rs-val { font-size: 16px; font-weight: 700; margin-top: 2px; }
+
+  .expense-list { padding: 0 16px; }
+  .expense-item {
+    background: white; border-radius: var(--radius-md);
+    padding: 12px 14px; margin-bottom: 6px;
+    display: flex; align-items: center; gap: 10px;
+    box-shadow: var(--shadow-sm); border: 1px solid var(--gray-100);
+  }
+  .exp-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .exp-info { flex: 1; }
+  .exp-name { font-size: 13px; font-weight: 700; color: var(--gray-800); }
+  .exp-date { font-size: 11px; color: var(--gray-500); margin-top: 1px; }
+  .exp-amount { font-size: 15px; font-weight: 800; color: var(--gray-800); font-family: var(--font-head); }
+
+  .add-fab {
+    position: sticky; bottom: 72px; right: 16px;
+    display: flex; justify-content: flex-end;
+    padding: 0 16px; margin-bottom: -4px;
+    pointer-events: none;
+  }
+  .fab {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--green-600); color: white;
+    border: none; font-size: 24px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 16px rgba(62,125,43,0.4);
+    cursor: pointer; pointer-events: all;
+    transition: transform 0.15s;
+  }
+  .fab:active { transform: scale(0.93); }
+
+  /* BOTTOM NAV */
+  .bottom-nav {
+    background: white;
+    border-top: 1px solid var(--gray-100);
+    display: flex;
+    flex-shrink: 0;
+    padding-bottom: 4px;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
+  }
+  .nav-item {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 8px 4px 4px;
+    cursor: pointer; transition: all 0.15s;
+    border: none; background: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nav-icon { font-size: 22px; line-height: 1; margin-bottom: 3px; }
+  .nav-label { font-size: 9px; font-weight: 700; letter-spacing: 0.02em; color: var(--gray-400); }
+  .nav-item.active .nav-label { color: var(--green-600); }
+  .nav-item.active .nav-icon { transform: scale(1.12); }
+  .nav-dot {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--green-500); margin-top: 3px;
+  }
+
+  /* Screen nav tabs */
+  .sub-tabs {
+    display: flex; background: white;
+    border-bottom: 1px solid var(--gray-100);
+    padding: 0 16px; gap: 20px;
+    overflow-x: auto; flex-shrink: 0;
+  }
+  .sub-tab {
+    padding: 12px 0; font-size: 13px; font-weight: 700;
+    color: var(--gray-400); border-bottom: 2px solid transparent;
+    cursor: pointer; white-space: nowrap; flex-shrink: 0;
+    transition: all 0.2s;
+  }
+  .sub-tab.active { color: var(--green-600); border-bottom-color: var(--green-600); }
+
+  /* Notification bubble */
+  .notif-badge {
+    position: absolute; top: -4px; right: -4px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--red-400); color: white;
+    font-size: 9px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid white;
+  }
+
+  /* Animations */
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .screen.active { animation: fadeIn 0.2s ease; }
+
+  .divider { height: 1px; background: var(--gray-100); margin: 4px 16px 14px; }
+
+  /* Tooltip pill */
+  .info-pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: var(--amber-50); border: 1px solid var(--amber-100);
+    border-radius: 20px; padding: 4px 10px;
+    font-size: 11px; color: var(--amber-700); font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  @media (max-width: 400px) {
+    .phone-frame { border-radius: 32px; }
+    .day-hero .day-num { font-size: 44px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>🐷 SwineTrack</h1>
+  <p>Interactive Mobile App Mockup — Swine Finisher Management</p>
+  <div class="badge-row">
+    <span class="badge badge-green">120-Day Calendar</span>
+    <span class="badge badge-amber">ADG Tracking</span>
+    <span class="badge badge-brown">ROI Monitor</span>
+  </div>
+</div>
+
+<div class="device-wrap">
+<div class="phone-frame">
+
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <span>9:41</span>
+    <div class="notch"></div>
+    <span>📶 🔋</span>
+  </div>
+
+  <!-- App Content -->
+  <div class="app-content" id="app-content">
+
+    <!-- ═══ HOME SCREEN ═══ -->
+    <div class="screen active" id="screen-home">
+      <div class="top-bar">
+        <div class="greeting">Magandang umaga! 👋</div>
+        <h2>SwineTrack</h2>
+        <div class="pig-badge">🐷 Bigas · Started Apr 1, 2026</div>
+      </div>
+
+      <div class="screen-body">
+
+        <div class="day-hero">
+          <div>
+            <div class="day-num">15</div>
+            <div class="day-label">Day of 120</div>
+            <div class="days-left" style="margin-top:6px;">105 days remaining</div>
+          </div>
+          <div class="day-right">
+            <div class="big-pig">🐷</div>
+          </div>
+        </div>
+
+        <div class="section-title">Today's Progress</div>
+        <div style="background:white;border-radius:var(--radius-md);padding:14px;box-shadow:var(--shadow-sm);border:1px solid var(--gray-100);margin-bottom:14px;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+            <span style="font-size:13px;font-weight:700;color:var(--gray-700);">Daily Tasks</span>
+            <span style="font-size:13px;font-weight:800;color:var(--green-600);">2 / 3</span>
+          </div>
+          <div class="progress-bar-wrap" style="margin-bottom:0;">
+            <div class="progress-bar-fill" style="width:67%;"></div>
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat-card">
+            <div class="stat-icon">⚖️</div>
+            <div class="stat-val">72<span style="font-size:14px;font-weight:600;color:var(--gray-500);"> kg</span></div>
+            <div class="stat-lbl">Current Weight</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">📈</div>
+            <div class="stat-val adg-good">648<span style="font-size:13px;"> g/d</span></div>
+            <div class="stat-lbl">Avg Daily Gain ✅</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🌾</div>
+            <div class="stat-val">3.0<span style="font-size:14px;font-weight:600;color:var(--gray-500);"> kg</span></div>
+            <div class="stat-lbl">Today's Feed</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">💰</div>
+            <div class="stat-val">₱<span style="font-size:18px;">4,230</span></div>
+            <div class="stat-lbl">Total Spent</div>
+          </div>
+        </div>
+
+        <div class="section-title">Today's Tasks</div>
+
+        <div class="task-card" onclick="goTo('checklist')">
+          <div class="task-icon task-icon-green">🌾</div>
+          <div class="task-info">
+            <div class="task-name">Morning Feeding</div>
+            <div class="task-sub">1.5 kg · 6:00 AM</div>
+          </div>
+          <div class="task-check done">✓</div>
+        </div>
+        <div class="task-card" onclick="goTo('checklist')">
+          <div class="task-icon task-icon-amber">🧹</div>
+          <div class="task-info">
+            <div class="task-name">Pen Cleaning</div>
+            <div class="task-sub">Manure removal & disinfect</div>
+          </div>
+          <div class="task-check done">✓</div>
+        </div>
+        <div class="task-card" onclick="goTo('checklist')">
+          <div class="task-icon task-icon-blue">🩺</div>
+          <div class="task-info">
+            <div class="task-name">Health Observation</div>
+            <div class="task-sub">Tap to log observation</div>
+          </div>
+          <div class="task-check"></div>
+        </div>
+
+        <div style="margin-top:14px;">
+          <div class="tip-card">
+            <div class="tip-icon">💡</div>
+            <div>
+              <div class="tip-title">Tip of the Day</div>
+              <div class="tip-text">Ensure fresh water is always available. Pigs drink 2–3x more than the feed they eat each day.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══ CALENDAR SCREEN ═══ -->
+    <div class="screen" id="screen-calendar">
+      <div class="top-bar-simple">
+        <span style="font-size:20px;">📅</span>
+        <h2>120-Day Calendar</h2>
+      </div>
+      <div style="background:white;padding:14px 16px 0;flex-shrink:0;">
+        <div class="cal-month-label">April 2026 — Day 1–30</div>
+        <div class="cal-legend">
+          <div class="leg-item"><div class="leg-dot" style="background:var(--green-300);"></div> Done</div>
+          <div class="leg-item"><div class="leg-dot" style="background:var(--green-600);"></div> Today</div>
+          <div class="leg-item"><div class="leg-dot" style="background:var(--red-400);"></div> Missed</div>
+          <div class="leg-item"><div class="leg-dot" style="background:var(--gray-200);"></div> Locked</div>
+        </div>
+      </div>
+      <div class="app-content" style="overflow-y:auto;">
+        <div class="cal-grid" id="cal-grid"></div>
+
+        <div style="padding:0 16px 16px;">
+          <div class="section-title">Selected Day — Day 15 (Today)</div>
+          <div class="task-card" style="margin-bottom:8px;cursor:default;">
+            <div class="task-icon task-icon-green">🌾</div>
+            <div class="task-info">
+              <div class="task-name">Feeding</div>
+              <div class="task-sub">AM 1.5 kg · PM 1.5 kg</div>
+            </div>
+            <div class="task-check done">✓</div>
+          </div>
+          <div class="task-card" style="margin-bottom:8px;cursor:default;">
+            <div class="task-icon task-icon-amber">🧹</div>
+            <div class="task-info">
+              <div class="task-name">Pen Cleaning</div>
+              <div class="task-sub">Completed</div>
+            </div>
+            <div class="task-check done">✓</div>
+          </div>
+          <div class="task-card" style="cursor:default;">
+            <div class="task-icon task-icon-blue">🩺</div>
+            <div class="task-info">
+              <div class="task-name">Health Observation</div>
+              <div class="task-sub">Pending</div>
+            </div>
+            <div class="task-check"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ CHECKLIST / DAILY TASKS ═══ -->
+    <div class="screen" id="screen-checklist">
+      <div class="top-bar-simple">
+        <button class="back-btn" onclick="goTo('home')">←</button>
+        <h2>Day 15 Tasks</h2>
+      </div>
+
+      <div class="app-content" style="overflow-y:auto;">
+        <div class="checklist-header">
+          <div class="progress-row">
+            <span class="progress-label">Daily Progress</span>
+            <span class="progress-num" id="prog-num">2 / 3</span>
+          </div>
+          <div class="progress-bar-wrap" style="margin-bottom:0;">
+            <div class="progress-bar-fill" id="prog-bar" style="width:67%;"></div>
+          </div>
+          <p style="font-size:11px;color:var(--gray-500);margin-top:8px;">Complete all tasks to mark this day as Done.</p>
+        </div>
+
+        <!-- Feeding -->
+        <div class="check-section">
+          <div class="check-section-title">🌾 Feeding</div>
+          <div class="check-item checked" id="ci-feed-am" onclick="toggleCheck('ci-feed-am')">
+            <div class="check-circle">✓</div>
+            <div>
+              <div class="check-text">Morning Feeding (AM)</div>
+              <div class="check-sub">Give 1.5 kg of finisher feed · 6:00 AM</div>
+            </div>
+          </div>
+          <div class="check-item" id="ci-feed-pm" onclick="toggleCheck('ci-feed-pm')">
+            <div class="check-circle"></div>
+            <div>
+              <div class="check-text">Afternoon Feeding (PM)</div>
+              <div class="check-sub">Give 1.5 kg of finisher feed · 3:00 PM</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pen Cleaning -->
+        <div class="check-section">
+          <div class="check-section-title">🧹 Pen Cleaning</div>
+          <div class="check-item checked" id="ci-clean" onclick="toggleCheck('ci-clean')">
+            <div class="check-circle">✓</div>
+            <div>
+              <div class="check-text">Remove manure and soiled bedding</div>
+              <div class="check-sub">Sweep and dispose of waste properly</div>
+            </div>
+          </div>
+          <div class="check-item" id="ci-water" onclick="toggleCheck('ci-water')">
+            <div class="check-circle"></div>
+            <div>
+              <div class="check-text">Refill water drinkers</div>
+              <div class="check-sub">Ensure clean, fresh water at all times</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Health -->
+        <div class="check-section">
+          <div class="check-section-title">🩺 Health Observation</div>
+          <div class="check-item" id="ci-health" onclick="goTo('health')">
+            <div class="check-circle"></div>
+            <div>
+              <div class="check-text">Log daily health observation</div>
+              <div class="check-sub">Tap to open Health Monitor →</div>
+            </div>
+          </div>
+        </div>
+
+        <button class="gate-btn" id="gate-btn">Complete All Tasks to Unlock ✓</button>
+      </div>
+    </div>
+
+    <!-- ═══ FEEDING GUIDE ═══ -->
+    <div class="screen" id="screen-feeding">
+      <div class="top-bar-simple">
+        <span style="font-size:20px;">🌾</span>
+        <h2>Feeding Guide</h2>
+      </div>
+
+      <div class="app-content" style="overflow-y:auto;">
+        <div class="feed-stage-card">
+          <div class="stage-label">Current Stage</div>
+          <div class="stage-name">Mid Finisher 🐷</div>
+          <div class="weight-range">Weight: 72 kg · Target: 80–100 kg</div>
+          <div style="margin-top:10px;background:rgba(255,255,255,0.15);border-radius:8px;padding:8px 12px;">
+            <span style="font-size:12px;opacity:0.85;">Daily Feed Allowance: </span>
+            <span style="font-size:16px;font-weight:800;">3.0 kg / day</span>
+          </div>
+        </div>
+
+        <div style="padding:0 16px 8px;">
+          <div class="info-pill">⚡ Based on 72 kg current weight · Updated today</div>
+        </div>
+
+        <div class="feed-session-row">
+          <div class="feed-session">
+            <div class="session-time">☀️ Morning</div>
+            <div class="session-icon">🌾</div>
+            <div class="session-kg">1.5</div>
+            <div class="session-unit">kilograms · 6:00 AM</div>
+          </div>
+          <div class="feed-session">
+            <div class="session-time">🌤️ Afternoon</div>
+            <div class="session-icon">🌾</div>
+            <div class="session-kg">1.5</div>
+            <div class="session-unit">kilograms · 3:00 PM</div>
+          </div>
+        </div>
+
+        <div class="feed-price-card">
+          <div class="price-row">
+            <span class="price-label">Feed Price (per kg)</span>
+            <span class="price-val">₱ 22.50</span>
+          </div>
+          <div class="price-sub">Tap to update feed price</div>
+        </div>
+
+        <div class="feed-price-card">
+          <div class="price-row">
+            <span class="price-label">Today's Feed Cost</span>
+            <span class="price-val">₱ 67.50</span>
+          </div>
+          <div class="price-sub">3.0 kg × ₱22.50</div>
+        </div>
+
+        <div style="padding:0 16px 14px;">
+          <div class="section-title">Growth Stage Guide</div>
+          <div style="background:white;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);border:1px solid var(--gray-100);overflow:hidden;">
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;font-size:11px;font-weight:700;color:var(--gray-500);padding:10px 12px;border-bottom:1px solid var(--gray-100);background:var(--gray-50);">
+              <span>Stage</span><span>Weight</span><span>Feed/day</span>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;font-size:12px;padding:10px 12px;border-bottom:1px solid var(--gray-100);">
+              <span style="color:var(--gray-500);">Early</span><span>60–80 kg</span><span style="color:var(--green-600);font-weight:700;">2.5 kg</span>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;font-size:12px;padding:10px 12px;border-bottom:1px solid var(--gray-100);background:var(--green-50);">
+              <span style="color:var(--green-700);font-weight:700;">Mid ←</span><span style="font-weight:700;">80–100 kg</span><span style="color:var(--green-600);font-weight:800;">3.0 kg</span>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;font-size:12px;padding:10px 12px;">
+              <span style="color:var(--gray-500);">Late</span><span>100–120 kg</span><span style="color:var(--green-600);font-weight:700;">3.2 kg</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══ HEALTH SCREEN ═══ -->
+    <div class="screen" id="screen-health">
+      <div class="top-bar-simple">
+        <button class="back-btn" onclick="goTo('checklist')">←</button>
+        <h2>Health Observation</h2>
+      </div>
+
+      <div class="app-content" style="overflow-y:auto;">
+
+        <div style="padding:16px 16px 8px;">
+          <div class="info-pill">📋 Day 15 · April 15, 2026</div>
+        </div>
+
+        <!-- Behavior -->
+        <div class="health-obs-card">
+          <div class="obs-title">🐾 Behavior</div>
+          <div class="obs-option-row">
+            <div class="obs-option selected-normal" id="beh-normal" onclick="selectObs('beh','normal')">
+              <div class="opt-icon">😊</div>Active & Alert
+            </div>
+            <div class="obs-option" id="beh-abnormal" onclick="selectObs('beh','abnormal')">
+              <div class="opt-icon">😔</div>Lethargic
+            </div>
+          </div>
+        </div>
+
+        <!-- Appetite -->
+        <div class="health-obs-card">
+          <div class="obs-title">🍽️ Appetite</div>
+          <div class="obs-option-row">
+            <div class="obs-option selected-normal" id="app-normal" onclick="selectObs('app','normal')">
+              <div class="opt-icon">😋</div>Eating Normally
+            </div>
+            <div class="obs-option" id="app-abnormal" onclick="selectObs('app','abnormal')">
+              <div class="opt-icon">😶</div>Reduced Appetite
+            </div>
+          </div>
+        </div>
+
+        <!-- Waste -->
+        <div class="health-obs-card">
+          <div class="obs-title">💩 Waste Condition</div>
+          <div class="obs-option-row">
+            <div class="obs-option" id="waste-normal" onclick="selectObs('waste','normal')">
+              <div class="opt-icon">✅</div>Normal
+            </div>
+            <div class="obs-option selected-abnormal" id="waste-abnormal" onclick="selectObs('waste','abnormal')">
+              <div class="opt-icon">⚠️</div>Loose / Watery
+            </div>
+          </div>
+          <div class="alert-box" id="waste-alert">
+            <div class="alert-icon">⚠️</div>
+            <div class="alert-text"><strong>Possible diarrhea.</strong> Ensure clean water. Reduce feed slightly. Consult a vet if condition continues for more than 24 hours.</div>
+          </div>
+        </div>
+
+        <div style="padding:0 16px 16px;">
+          <button style="width:100%;padding:14px;background:var(--green-600);color:white;border:none;border-radius:var(--radius-md);font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font-main);" onclick="saveHealth()">
+            Save Observation ✓
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══ WEIGHT TRACKER ═══ -->
+    <div class="screen" id="screen-weight">
+      <div class="top-bar-simple">
+        <span style="font-size:20px;">⚖️</span>
+        <h2>Weight Tracker</h2>
+      </div>
+
+      <div class="app-content" style="overflow-y:auto;">
+
+        <div class="adg-hero">
+          <div class="adg-label">This Week's ADG</div>
+          <div class="adg-value adg-good">648 <span style="font-size:20px;font-weight:600;color:var(--gray-500);">g/day</span></div>
+          <div class="adg-unit">Target: 600–700 g/day</div>
+          <div>
+            <span class="adg-status-badge on-track">✅ On Track</span>
+          </div>
+          <div style="background:var(--gray-100);border-radius:20px;height:8px;margin-top:14px;overflow:hidden;">
+            <div style="height:100%;border-radius:20px;background:var(--green-400);width:72%;"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--gray-500);margin-top:4px;">
+            <span>0 g</span><span>600</span><span>700</span><span>800 g</span>
+          </div>
+        </div>
+
+        <div class="weight-chart-wrap">
+          <div class="chart-title">Weight Progress (Weeks 1–2)</div>
+          <svg class="chart-svg" viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#6ab04c" stop-opacity="0.25"/>
+                <stop offset="100%" stop-color="#6ab04c" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <!-- Grid lines -->
+            <line x1="30" y1="20" x2="290" y2="20" stroke="#ede9e3" stroke-width="1"/>
+            <line x1="30" y1="50" x2="290" y2="50" stroke="#ede9e3" stroke-width="1"/>
+            <line x1="30" y1="80" x2="290" y2="80" stroke="#ede9e3" stroke-width="1"/>
+            <line x1="30" y1="108" x2="290" y2="108" stroke="#ede9e3" stroke-width="1"/>
+            <!-- Y labels -->
+            <text x="8" y="24" font-size="9" fill="#9e9890">80</text>
+            <text x="8" y="54" font-size="9" fill="#9e9890">75</text>
+            <text x="8" y="84" font-size="9" fill="#9e9890">70</text>
+            <text x="8" y="112" font-size="9" fill="#9e9890">65</text>
+            <!-- Area fill -->
+            <path d="M 30 108 L 70 94 L 110 82 L 150 72 L 190 60 L 230 50 L 270 40 L 270 108 Z" fill="url(#chartGrad)"/>
+            <!-- Line -->
+            <polyline points="30,108 70,94 110,82 150,72 190,60 230,50 270,40" fill="none" stroke="#6ab04c" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+            <!-- Points -->
+            <circle cx="30" cy="108" r="4" fill="#6ab04c"/>
+            <circle cx="70" cy="94" r="4" fill="#6ab04c"/>
+            <circle cx="110" cy="82" r="4" fill="#6ab04c"/>
+            <circle cx="150" cy="72" r="4" fill="#6ab04c"/>
+            <circle cx="190" cy="60" r="4" fill="#6ab04c"/>
+            <circle cx="230" cy="50" r="4" fill="#6ab04c"/>
+            <circle cx="270" cy="40" r="5" fill="white" stroke="#6ab04c" stroke-width="3"/>
+            <!-- X labels -->
+            <text x="26" y="118" font-size="9" fill="#9e9890">W1</text>
+            <text x="66" y="118" font-size="9" fill="#9e9890">W2</text>
+            <text x="106" y="118" font-size="9" fill="#9e9890">W3</text>
+            <text x="146" y="118" font-size="9" fill="#9e9890">W4</text>
+            <text x="186" y="118" font-size="9" fill="#9e9890">W5</text>
+            <text x="226" y="118" font-size="9" fill="#9e9890">W6</text>
+            <text x="265" y="118" font-size="9" fill="#9e9890">W7</text>
+          </svg>
+        </div>
+
+        <div class="section-title" style="padding:0 16px;">Weigh-in History</div>
+        <div class="weigh-list">
+          <div class="weigh-row">
+            <div class="w-day">Day 1</div>
+            <div>
+              <div class="w-kg">65 kg</div>
+              <div style="font-size:10px;color:var(--gray-500);">Apr 1, 2026</div>
+            </div>
+            <div class="w-adg" style="background:var(--gray-100);color:var(--gray-500);">Baseline</div>
+          </div>
+          <div class="weigh-row">
+            <div class="w-day">Day 7</div>
+            <div>
+              <div class="w-kg">69.3 kg</div>
+              <div style="font-size:10px;color:var(--gray-500);">Apr 8, 2026</div>
+            </div>
+            <div class="w-adg good">+614 g/d</div>
+          </div>
+          <div class="weigh-row" style="border:1.5px solid var(--green-200);background:var(--green-50);">
+            <div class="w-day" style="color:var(--green-600);">Day 15</div>
+            <div>
+              <div class="w-kg" style="color:var(--green-700);">72.0 kg</div>
+              <div style="font-size:10px;color:var(--green-600);">Apr 15, 2026 · Today</div>
+            </div>
+            <div class="w-adg good">+648 g/d</div>
+          </div>
+        </div>
+
+        <div style="padding:14px 16px 20px;">
+          <button style="width:100%;padding:14px;background:var(--green-600);color:white;border:none;border-radius:var(--radius-md);font-size:14px;font-weight:700;cursor:pointer;font-family:var(--font-main);">
+            + Record New Weight
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══ EXPENSE SCREEN ═══ -->
+    <div class="screen" id="screen-expense">
+      <div class="top-bar-simple">
+        <span style="font-size:20px;">💰</span>
+        <h2>Expense & ROI</h2>
+      </div>
+
+      <div class="app-content" style="overflow-y:auto;">
+
+        <div class="roi-hero">
+          <div class="roi-title">Projected Net Profit</div>
+          <div class="roi-amount">₱ 3,270</div>
+          <div class="roi-pct">ROI: 43.6% · Based on current market price</div>
+          <div class="roi-sub-row">
+            <div class="roi-sub">
+              <div class="rs-label">Total Invested</div>
+              <div class="rs-val">₱ 7,500</div>
+            </div>
+            <div class="roi-sub">
+              <div class="rs-label">Projected Revenue</div>
+              <div class="rs-val">₱ 10,770</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding:0 16px 10px;">
+          <div class="section-title">Expense Breakdown</div>
+          <div style="background:white;border-radius:var(--radius-md);padding:14px;box-shadow:var(--shadow-sm);border:1px solid var(--gray-100);margin-bottom:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+              <span style="font-size:13px;font-weight:700;color:var(--gray-700);">By Category</span>
+              <span style="font-size:11px;color:var(--gray-400);">Day 15 of 120</span>
+            </div>
+            <div style="margin-bottom:8px;">
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span style="color:var(--gray-600);">🌾 Feed</span><span style="font-weight:700;">₱ 4,230</span></div>
+              <div style="background:var(--gray-100);border-radius:20px;height:6px;overflow:hidden;"><div style="background:var(--green-400);width:56%;height:100%;border-radius:20px;"></div></div>
+            </div>
+            <div style="margin-bottom:8px;">
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span style="color:var(--gray-600);">💊 Medicine</span><span style="font-weight:700;">₱ 1,800</span></div>
+              <div style="background:var(--gray-100);border-radius:20px;height:6px;overflow:hidden;"><div style="background:var(--blue-400);width:24%;height:100%;border-radius:20px;"></div></div>
+            </div>
+            <div style="margin-bottom:8px;">
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span style="color:var(--gray-600);">🧪 Vitamins</span><span style="font-weight:700;">₱ 870</span></div>
+              <div style="background:var(--gray-100);border-radius:20px;height:6px;overflow:hidden;"><div style="background:var(--amber-400);width:12%;height:100%;border-radius:20px;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span style="color:var(--gray-600);">📦 Others</span><span style="font-weight:700;">₱ 600</span></div>
+              <div style="background:var(--gray-100);border-radius:20px;height:6px;overflow:hidden;"><div style="background:var(--brown-400);width:8%;height:100%;border-radius:20px;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title" style="padding:0 16px;">Recent Entries</div>
+        <div class="expense-list">
+          <div class="expense-item">
+            <div class="exp-icon" style="background:var(--green-50);">🌾</div>
+            <div class="exp-info">
+              <div class="exp-name">Finisher Feed (50 kg sack)</div>
+              <div class="exp-date">Feed · Apr 15, 2026</div>
+            </div>
+            <div class="exp-amount">₱ 1,125</div>
+          </div>
+          <div class="expense-item">
+            <div class="exp-icon" style="background:var(--blue-100);">💊</div>
+            <div class="exp-info">
+              <div class="exp-name">Oxytetracycline</div>
+              <div class="exp-date">Medicine · Apr 12, 2026</div>
+            </div>
+            <div class="exp-amount">₱ 350</div>
+          </div>
+          <div class="expense-item">
+            <div class="exp-icon" style="background:var(--amber-50);">🧪</div>
+            <div class="exp-info">
+              <div class="exp-name">Vitamin B-Complex</div>
+              <div class="exp-date">Vitamins · Apr 10, 2026</div>
+            </div>
+            <div class="exp-amount">₱ 180</div>
+          </div>
+          <div class="expense-item">
+            <div class="exp-icon" style="background:var(--green-50);">🌾</div>
+            <div class="exp-info">
+              <div class="exp-name">Finisher Feed (50 kg sack)</div>
+              <div class="exp-date">Feed · Apr 8, 2026</div>
+            </div>
+            <div class="exp-amount">₱ 1,125</div>
+          </div>
+        </div>
+
+        <div style="height:20px;"></div>
+
+        <div class="add-fab">
+          <button class="fab">+</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- end app-content -->
+
+  <!-- Bottom Nav -->
+  <div class="bottom-nav">
+    <button class="nav-item active" id="nav-home" onclick="navigate('home')">
+      <div class="nav-icon">🏠</div>
+      <div class="nav-label">Home</div>
+      <div class="nav-dot"></div>
+    </button>
+    <button class="nav-item" id="nav-calendar" onclick="navigate('calendar')">
+      <div class="nav-icon" style="position:relative;">📅<span class="notif-badge" id="cal-badge">3</span></div>
+      <div class="nav-label">Calendar</div>
+    </button>
+    <button class="nav-item" id="nav-feeding" onclick="navigate('feeding')">
+      <div class="nav-icon">🌾</div>
+      <div class="nav-label">Feeding</div>
+    </button>
+    <button class="nav-item" id="nav-weight" onclick="navigate('weight')">
+      <div class="nav-icon">⚖️</div>
+      <div class="nav-label">Weight</div>
+    </button>
+    <button class="nav-item" id="nav-expense" onclick="navigate('expense')">
+      <div class="nav-icon">💰</div>
+      <div class="nav-label">Expense</div>
+    </button>
+  </div>
+
+</div><!-- end phone-frame -->
+</div><!-- end device-wrap -->
+
+<div style="text-align:center;margin-top:20px;font-size:12px;color:#8b7f72;">
+  Tap bottom nav or cards to navigate · SwineTrack Prototype v1.0 · PASU 2026
+</div>
+
+<script>
+  // Build calendar grid
+  function buildCal() {
+    const grid = document.getElementById('cal-grid');
+    for (let d = 1; d <= 120; d++) {
+      const el = document.createElement('div');
+      el.className = 'cal-day';
+      el.textContent = d;
+      if (d < 14) el.className += ' done';
+      else if (d === 15) el.className += ' today';
+      else if (d === 14) el.className += ' missed';
+      else if (d <= 120) el.className += ' locked';
+      if (d <= 15) {
+        const dot = document.createElement('div');
+        dot.className = 'cal-dot';
+        el.appendChild(dot);
+      }
+      grid.appendChild(el);
+    }
+  }
+  buildCal();
+
+  // Navigation
+  const screens = ['home','calendar','checklist','feeding','health','weight','expense'];
+  const navMap = { home:'nav-home', calendar:'nav-calendar', feeding:'nav-feeding', weight:'nav-weight', expense:'nav-expense' };
+
+  function navigate(name) {
+    screens.forEach(s => {
+      document.getElementById('screen-'+s).classList.remove('active');
+    });
+    document.getElementById('screen-'+name).classList.add('active');
+    document.getElementById('app-content').scrollTop = 0;
+    Object.values(navMap).forEach(n => document.getElementById(n).classList.remove('active'));
+    if (navMap[name]) document.getElementById(navMap[name]).classList.add('active');
+  }
+
+  function goTo(name) {
+    navigate(name);
+    if (name === 'checklist') updateProgress();
+  }
+
+  // Checklist toggle
+  let checks = { 'ci-feed-am': true, 'ci-clean': true, 'ci-feed-pm': false, 'ci-water': false, 'ci-health': false };
+
+  function toggleCheck(id) {
+    if (id === 'ci-health') { goTo('health'); return; }
+    checks[id] = !checks[id];
+    const el = document.getElementById(id);
+    if (checks[id]) { el.classList.add('checked'); el.querySelector('.check-circle').textContent = '✓'; }
+    else { el.classList.remove('checked'); el.querySelector('.check-circle').textContent = ''; }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const done = Object.values(checks).filter(Boolean).length;
+    const total = Object.keys(checks).length;
+    const pct = Math.round((done/total)*100);
+    document.getElementById('prog-num').textContent = done + ' / ' + total;
+    document.getElementById('prog-bar').style.width = pct + '%';
+    const btn = document.getElementById('gate-btn');
+    if (done === total) {
+      btn.textContent = '✅ Day Complete! Mark as Done';
+      btn.classList.add('unlocked');
+    } else {
+      btn.textContent = 'Complete All Tasks to Unlock ✓';
+      btn.classList.remove('unlocked');
+    }
+  }
+
+  // Health obs
+  function selectObs(group, type) {
+    const normal = document.getElementById(group+'-normal');
+    const abnormal = document.getElementById(group+'-abnormal');
+    normal.className = 'obs-option' + (type==='normal' ? ' selected-normal' : '');
+    abnormal.className = 'obs-option' + (type==='abnormal' ? ' selected-abnormal' : '');
+    const alertEl = document.getElementById(group+'-alert');
+    if (alertEl) alertEl.style.display = type==='abnormal' ? 'flex' : 'none';
+  }
+
+  function saveHealth() {
+    checks['ci-health'] = true;
+    const el = document.getElementById('ci-health');
+    el.classList.add('checked');
+    el.querySelector('.check-circle').textContent = '✓';
+    updateProgress();
+    goTo('checklist');
+  }
+
+  // Init
+  updateProgress();
+</script>
+</body>
+</html>
